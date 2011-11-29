@@ -1,0 +1,3 @@
+[submodule "django-mode"]
+	path = django-mode
+	url = git://github.com/myfreeweb/django-mode.git
