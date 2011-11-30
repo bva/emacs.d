@@ -1,7 +1,6 @@
 ; layman -a emacs
 ;
 ; app-emacs/css-mode
-; app-emacs/js2-mode
 ; app-emacs/python-mode
 ; dev-python/ropemode
 ; app-emacs/pymacs
@@ -26,10 +25,19 @@
                              (x-display-pixel-height) pixels-per-row)))
   (set-frame-position frame 0 0)))
 
-
-;; Сохраняем десктоп между запусками
-(setq desktop-save 't)
-(desktop-save-mode 1)
+(defun toggle-fullscreen (&optional f)
+  (interactive)
+  (let ((current-value (frame-parameter nil 'fullscreen)))
+    (set-frame-parameter nil 'fullscreen
+			 (if (equal 'fullboth current-value)
+			     (if (boundp 'old-fullscreen) old-fullscreen nil)
+			   (progn (setq old-fullscreen current-value)
+				  'fullboth)))))
+(global-set-key [f11] 'toggle-fullscreen)
+;; Make new frames fullscreen by default. Note: this hook doesn't do
+;; anything to the initial frame if it's in your .emacs, since that file is
+;; read _after_ the initial frame is created.
+(add-hook 'after-make-frame-functions 'toggle-fullscreen)
 
 (show-paren-mode 1)
 (setq inhibit-startup-message t)
@@ -114,7 +122,6 @@
 (display-time-mode)      ;; Show current time in status line
 
 (global-set-key "\C-l" 'goto-line)
-(setq django-mode-path (concat user-emacs-directory "django-mode"))
 
 (setq erlang-root-dir "/usr/local/erlang")
 (setq erlang-lib-dir
@@ -130,13 +137,18 @@
        "emacs"
        ))
 
+(setq django-mode-path (concat user-emacs-directory "django-mode"))
+(setq js2-mode-path (concat user-emacs-directory "js2-mode"))
 (add-to-list 'load-path django-mode-path)
+(add-to-list 'load-path js2-mode-path)
 (add-to-list 'load-path erlang-emacs-dir)
 
 (require 'site-gentoo)
 (require 'django-html-mode)
 (require 'django-mode)
+(require 'js2-mode)
 (require 'erlang-start)
+(require 'ecb)
 
 (yas/initialize)
 (yas/load-directory "/usr/share/emacs/etc/yasnippet/snippets")
@@ -158,6 +170,27 @@
      (list "epylint" (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks '("\.py$" flymake-pylint-init)))
 
-(require 'ecb)
-(ecb-activate)
 (maximize-frame)
+(semantic-load-enable-minimum-features)
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ecb-auto-activate t)
+ '(ecb-layout-name "left15")
+ '(ecb-layout-window-sizes (quote (("left15" (0.2088607594936709 . 0.4918032786885246) (0.2088607594936709 . 0.4918032786885246)))))
+ '(ecb-options-version "2.40")
+ '(ecb-source-path (quote (("/home/impweb/impweb" "/impweb"))))
+ '(ecb-tip-of-the-day nil)
+ '(ecb-tree-indent 2)
+ '(ecb-use-speedbar-instead-native-tree-buffer (quote dir))
+ '(imenu-auto-rescan nil)
+ '(js2-basic-offset 2)
+ '(js2-cleanup-whitespace t))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
