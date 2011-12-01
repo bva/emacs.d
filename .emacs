@@ -119,6 +119,11 @@
 (setq whitespace-style '(trailing lines-tail empty)) ;turns on white space mode only for tabs
 (global-whitespace-mode 1)
 
+(setq cssm-indent-level 2)
+(setq cssm-newline-before-closing-bracket t)
+(setq cssm-indent-function #'cssm-c-style-indenter)
+(setq cssm-mirror-mode t)
+
 (display-time-mode)      ;; Show current time in status line
 
 (global-set-key "\C-l" 'goto-line)
@@ -187,7 +192,9 @@
  '(ecb-use-speedbar-instead-native-tree-buffer (quote dir))
  '(imenu-auto-rescan nil)
  '(js2-basic-offset 2)
- '(js2-cleanup-whitespace t))
+ '(js2-cleanup-whitespace t)
+ '(js2-dynamic-idle-timer-adjust 2)
+ '(js2-idle-timer-delay 0.2))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
