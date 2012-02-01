@@ -168,6 +168,10 @@
 
 (pymacs-load "ropemacs" "rope-")
 
+(setq js2-mode-hook
+      '(lambda () (progn
+		    (set-variable 'indent-tabs-mode nil))))
+
 (when (load "flymake" t)
   (defun flymake-pylint-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))
@@ -191,6 +195,7 @@
  '(ecb-tree-indent 2)
  '(ecb-use-speedbar-instead-native-tree-buffer (quote dir))
  '(imenu-auto-rescan nil)
+ '(js2-allow-member-expr-as-function-name t)
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
  '(js2-dynamic-idle-timer-adjust 2)
