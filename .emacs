@@ -187,6 +187,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(ecb-auto-activate t)
+ '(ecb-auto-expand-tag-tree (quote all))
  '(ecb-layout-name "left15")
  '(ecb-layout-window-sizes (quote (("left15" (0.2088607594936709 . 0.4918032786885246) (0.2088607594936709 . 0.4918032786885246)))))
  '(ecb-options-version "2.40")
