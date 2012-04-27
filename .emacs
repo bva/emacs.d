@@ -192,6 +192,8 @@
  '(js2-basic-offset 2)
  '(js2-cleanup-whitespace t)
  '(js2-dynamic-idle-timer-adjust 2)
+ '(js2-bounce-indent-p t)
+ '(js2-enter-indents-newline t)
  '(js2-idle-timer-delay 0.2))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
