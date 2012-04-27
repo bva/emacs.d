@@ -7,24 +7,6 @@
 ; dev-python/pylint
 ; app-emacs/yasnippet
 
-(defun maximize-frame (&optional frame)
-"Maximize the selected FRAME."
-(interactive)
-(or frame
-    (setq frame (selected-frame)))
-(let ((pixels-per-col (/ (float (frame-pixel-width))
-                         (frame-width)))
-      (pixels-per-row (/ (float
-                          (frame-pixel-height)) (frame-height))))
-  (set-frame-size frame
-                  ;; truncate or round?
-                  (truncate (/
-                             (x-display-pixel-width) pixels-per-col))
-                  ;; reduce size to account for the toolbar
-                  (truncate (/
-                             (x-display-pixel-height) pixels-per-row)))
-  (set-frame-position frame 0 0)))
-
 (defun toggle-fullscreen (&optional f)
   (interactive)
   (let ((current-value (frame-parameter nil 'fullscreen)))
@@ -38,6 +20,10 @@
 ;; anything to the initial frame if it's in your .emacs, since that file is
 ;; read _after_ the initial frame is created.
 (add-hook 'after-make-frame-functions 'toggle-fullscreen)
+
+(setq user-full-name "Vitaliy Batichko")
+(setq user-login-name "vbatichko")
+(setq mail-host-address "gmail.com")
 
 (show-paren-mode 1)
 (setq inhibit-startup-message t)
@@ -89,7 +75,7 @@
 
 ;; ===== Make Text mode the default mode for new buffers =====
 ;;
-(setq default-major-mode 'text-mode)
+(setq major-mode 'text-mode)
 
 ;; ============================
 ;; Setup syntax, background, and foreground coloring
@@ -128,25 +114,33 @@
 
 (global-set-key "\C-l" 'goto-line)
 
-(setq erlang-root-dir "/usr/local/erlang")
+(setq erlang-root-dir
+      (shell-command-to-string
+       "erl -noshell -eval 'io:format(\"~s\", [code:root_dir()]), erlang:halt().'"
+       )
+      )
+
 (setq erlang-lib-dir
-      (concat erlang-root-dir "/lib/erlang/lib"))
+      (concat erlang-root-dir "/lib"))
 
 (setq erlang-emacs-dir
       (concat
-       erlang-lib-dir
-       "/"
-       (file-name-completion
-	"tools"
-	erlang-lib-dir)
+       erlang-lib-dir "/"
+       (file-name-completion "tools" erlang-lib-dir)
        "emacs"
-       ))
+       )
+      )
+
+(add-to-list 'exec-path (concat erlang-root-dir "/bin"))
 
 (setq django-mode-path (concat user-emacs-directory "django-mode"))
 (setq js2-mode-path (concat user-emacs-directory "js2-mode"))
+(setq js3-mode-path (concat user-emacs-directory "js3-mode"))
 (add-to-list 'load-path django-mode-path)
 (add-to-list 'load-path js2-mode-path)
+(add-to-list 'load-path js3-mode-path)
 (add-to-list 'load-path erlang-emacs-dir)
+(add-to-list 'load-path user-emacs-directory)
 
 (require 'site-gentoo)
 (require 'django-html-mode)
@@ -154,14 +148,11 @@
 (require 'js2-mode)
 (require 'erlang-start)
 (require 'ecb)
+(require 'gjslint)
 
 (yas/initialize)
 (yas/load-directory "/usr/share/emacs/etc/yasnippet/snippets")
 (yas/load-directory (concat django-mode-path "/snippets"))
-
-(setq erlang-root-dir "/usr/local/erlang")
-(add-to-list 'exec-path "/usr/local/erlang/bin")
-(setq erlang-man-root-dir "/usr/local/erlang/man")
 
 (add-to-list 'auto-mode-alist '("\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\.html$" . django-html-mode))
@@ -171,15 +162,16 @@
 (setq js2-mode-hook
       '(lambda () (progn
 		    (set-variable 'indent-tabs-mode nil))))
+(add-hook 'js2-mode-hook
+	  (lambda () (flymake-mode t)))
 
 (when (load "flymake" t)
   (defun flymake-pylint-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))
-	  (local-file (file-relative-name temp-file (file-name-directory buffer-file-name))))
-     (list "epylint" (list local-file))))
+	   (local-file (file-relative-name temp-file (file-name-directory buffer-file-name))))
+      (list "epylint" (list local-file))))
   (add-to-list 'flymake-allowed-file-name-masks '("\.py$" flymake-pylint-init)))
 
-(maximize-frame)
 (semantic-load-enable-minimum-features)
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
