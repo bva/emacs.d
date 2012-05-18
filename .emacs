@@ -135,10 +135,11 @@
 
 (setq django-mode-path (concat user-emacs-directory "django-mode"))
 (setq js2-mode-path (concat user-emacs-directory "js2-mode"))
-(setq js3-mode-path (concat user-emacs-directory "js3-mode"))
+(setq distel-mode-path (concat user-emacs-directory "distel/elisp"))
+
 (add-to-list 'load-path django-mode-path)
 (add-to-list 'load-path js2-mode-path)
-(add-to-list 'load-path js3-mode-path)
+(add-to-list 'load-path distel-mode-path)
 (add-to-list 'load-path erlang-emacs-dir)
 (add-to-list 'load-path user-emacs-directory)
 
@@ -149,6 +150,9 @@
 (require 'erlang-start)
 (require 'ecb)
 (require 'gjslint)
+(require 'distel)
+
+(distel-setup)
 
 (yas/initialize)
 (yas/load-directory "/usr/share/emacs/etc/yasnippet/snippets")
@@ -190,11 +194,12 @@
  '(imenu-auto-rescan nil)
  '(js2-allow-member-expr-as-function-name t)
  '(js2-basic-offset 2)
+ '(js2-bounce-indent-p t)
  '(js2-cleanup-whitespace t)
  '(js2-dynamic-idle-timer-adjust 2)
- '(js2-bounce-indent-p t)
  '(js2-enter-indents-newline t)
- '(js2-idle-timer-delay 0.2))
+ '(js2-idle-timer-delay 0.2)
+ '(vc-follow-symlinks t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
