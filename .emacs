@@ -149,6 +149,10 @@
 (require 'erlang-start)
 (require 'ecb)
 (require 'gjslint)
+(require 'whitespace)
+
+(setq whitespace-style
+      '(face trailing empty lines-tail trailing))
 
 (yas/initialize)
 (yas/load-directory "/usr/share/emacs/etc/yasnippet/snippets")
@@ -158,6 +162,8 @@
 (add-to-list 'auto-mode-alist '("\.html$" . django-html-mode))
 
 (pymacs-load "ropemacs" "rope-")
+
+(setq vc-follow-symlinks 't)
 
 (setq js2-mode-hook
       '(lambda () (progn
