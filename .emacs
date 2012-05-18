@@ -154,6 +154,11 @@
 
 (distel-setup)
 
+(require 'whitespace)
+
+(setq whitespace-style
+      '(face trailing empty lines-tail trailing))
+
 (yas/initialize)
 (yas/load-directory "/usr/share/emacs/etc/yasnippet/snippets")
 (yas/load-directory (concat django-mode-path "/snippets"))
