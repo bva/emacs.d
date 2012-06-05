@@ -136,13 +136,16 @@
 (setq django-mode-path (concat user-emacs-directory "django-mode"))
 (setq js2-mode-path (concat user-emacs-directory "js2-mode"))
 (setq distel-mode-path (concat user-emacs-directory "distel/elisp"))
+(setq soy-mode-path (concat user-emacs-directory "soy-mode"))
 
 (add-to-list 'load-path django-mode-path)
 (add-to-list 'load-path js2-mode-path)
 (add-to-list 'load-path distel-mode-path)
 (add-to-list 'load-path erlang-emacs-dir)
+(add-to-list 'load-path soy-mode-path)
 (add-to-list 'load-path user-emacs-directory)
 
+(require 'adoc-mode)
 (require 'site-gentoo)
 (require 'django-html-mode)
 (require 'django-mode)
@@ -151,10 +154,13 @@
 (require 'ecb)
 (require 'gjslint)
 (require 'distel)
-
-(distel-setup)
-
 (require 'whitespace)
+(require 'soy-mode)
+(require 'auto-complete-config)
+
+(global-auto-complete-mode t)
+(ac-config-default)
+(distel-setup)
 
 (setq whitespace-style
       '(face trailing empty lines-tail trailing))
@@ -165,6 +171,7 @@
 
 (add-to-list 'auto-mode-alist '("\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\.html$" . django-html-mode))
+(add-to-list 'auto-mode-alist '("\.adoc$" . adoc-mode))
 
 (pymacs-load "ropemacs" "rope-")
 

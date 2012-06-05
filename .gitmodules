@@ -7,3 +7,6 @@
 [submodule "distel"]
 	path = distel
 	url = git://github.com/massemanet/distel.git
+[submodule "soy-mode"]
+	path = soy-mode
+	url = git://github.com/toomore-such/soy-mode.git
