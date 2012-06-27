@@ -10,3 +10,6 @@
 [submodule "soy-mode"]
 	path = soy-mode
 	url = git://github.com/toomore-such/soy-mode.git
+[submodule "closure-lint-mode"]
+	path = closure-lint-mode
+	url = git://github.com/r0man/closure-lint-mode.git

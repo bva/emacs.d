@@ -137,12 +137,14 @@
 (setq js2-mode-path (concat user-emacs-directory "js2-mode"))
 (setq distel-mode-path (concat user-emacs-directory "distel/elisp"))
 (setq soy-mode-path (concat user-emacs-directory "soy-mode"))
+(setq gjslint-mode-path (concat user-emacs-directory "closure-lint-mode"))
 
 (add-to-list 'load-path django-mode-path)
 (add-to-list 'load-path js2-mode-path)
 (add-to-list 'load-path distel-mode-path)
 (add-to-list 'load-path erlang-emacs-dir)
 (add-to-list 'load-path soy-mode-path)
+(add-to-list 'load-path gjslint-mode-path)
 (add-to-list 'load-path user-emacs-directory)
 
 (require 'adoc-mode)
@@ -152,10 +154,10 @@
 (require 'js2-mode)
 (require 'erlang-start)
 (require 'ecb)
-(require 'gjslint)
 (require 'distel)
 (require 'whitespace)
 (require 'soy-mode)
+(require 'closure-lint-mode)
 (require 'auto-complete-config)
 
 (global-auto-complete-mode t)
