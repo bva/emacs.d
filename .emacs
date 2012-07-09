@@ -25,9 +25,14 @@
 (setq user-login-name "vbatichko")
 (setq mail-host-address "gmail.com")
 
+(setq x-select-enable-clipboard t)
+
 (show-paren-mode 1)
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
+
+(autoload 'ibuffer "ibuffer" "List buffers." t)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (require 'cua-base)
 (cua-mode t)
@@ -147,6 +152,13 @@
 (add-to-list 'load-path gjslint-mode-path)
 (add-to-list 'load-path user-emacs-directory)
 
+(require 'cl)
+(require 'saveplace)
+(require 'ffap)
+(require 'uniquify)
+(require 'ansi-color)
+(require 'recentf)
+(require 'tramp)
 (require 'adoc-mode)
 (require 'site-gentoo)
 (require 'django-html-mode)
@@ -205,6 +217,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(css-indent-offset 2)
  '(ecb-auto-activate t)
  '(ecb-auto-expand-tag-tree (quote all))
  '(ecb-layout-name "left15")
