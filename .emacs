@@ -217,6 +217,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(closure-lint-gjs-lint "gjslint")
  '(css-indent-offset 2)
  '(ecb-auto-activate t)
  '(ecb-auto-expand-tag-tree (quote all))
