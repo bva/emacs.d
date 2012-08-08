@@ -12,4 +12,4 @@
 	url = git://github.com/toomore-such/soy-mode.git
 [submodule "closure-lint-mode"]
 	path = closure-lint-mode
-	url = git://github.com/r0man/closure-lint-mode.git
+	url = git@github.com:bva/closure-lint-mode.git
