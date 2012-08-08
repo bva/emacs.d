@@ -1,3 +1,5 @@
 /auto-save-list
 /.emacs.before_*
 /.emacs.desktop
+ac-comphist.dat
+*~
